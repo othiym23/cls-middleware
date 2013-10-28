@@ -3,19 +3,33 @@
 Dirt-simple middleware for Connect and Restify handlers into a
 continuation-local storage context.
 
-Example:
+Example `app.js`:
 
 ```js
 var cls     = require('continuation-local-storage');
 var express = require('express');
 var clsify  = require('cls-middleware');
+var route   = require('./route.js');
 
 var ns = cls.createNamespace('namespace');
 
 var app = express();
 app.use(clsify(ns));
 
-app.get('/users', function (req, res, next) {
-  // cls.getNamespace('namespace').get('whatever') will work here now.
-});
+ns.set('whatever', 'a value');
+
+app.get('/users', route);
+```
+
+with `./route.js`:
+
+```js
+var cls = require('continuation-local-storage');
+
+module.exports = function (req, res, next) {
+  // pulling from the namespace, and set up per request
+  res.send({value : cls.getNameSpace('namespace').get('whatever')});
+
+  next();
+};
 ```
