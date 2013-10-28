@@ -16,6 +16,6 @@ var app = express();
 app.use(clsify(ns));
 
 app.get('/users', function (req, res, next) {
-  // clse.getNamespace('namespace').get('whatever') will work here now.
+  // cls.getNamespace('namespace').get('whatever') will work here now.
 });
 ```
