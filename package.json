@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/othiym23/express-cls.git"
+    "url": "https://github.com/othiym23/cls-middleware.git"
   },
   "keywords": [
     "continuation-local-storage",
@@ -17,7 +17,7 @@
   "author": "Forrest L Norvell <ogd@aoaioxxysz.net>",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/othiym23/express-cls/issues"
+    "url": "https://github.com/othiym23/cls-middleware/issues"
   },
   "dependencies": {
     "continuation-local-storage": "~2.4.3"
