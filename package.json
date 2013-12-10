@@ -20,9 +20,10 @@
     "url": "https://github.com/othiym23/cls-middleware/issues"
   },
   "dependencies": {
-    "continuation-local-storage": "~2.4.3"
+    "continuation-local-storage": "~2"
   },
   "devDependencies": {
+    "continuation-local-storage": "~2",
     "express": "~3.4.3",
     "tap": "~0.4.4",
     "request": "~2.27.0"
