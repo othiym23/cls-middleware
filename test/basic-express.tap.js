@@ -12,30 +12,34 @@ test("basic express scenario", function (t) {
   var request = require('request');
 
   var ns = cls.createNamespace('cls@test');
-  ns.set('value', 1);
+  ns.run(function () {
+    ns.set('value', 1);
 
-  var app = express();
-  t.doesNotThrow(function () { app.use(clsify(ns)); });
-  app.use(function (req, res, next) {
-    var orig = ns.get('value');
-    t.equal(orig, 1, "value is default");
+    var app = express();
+    t.doesNotThrow(function () { app.use(clsify(ns)); });
+    app.use(function (req, res, next) {
+      var orig = ns.get('value');
+      t.equal(orig, 1, "value is default");
 
-    ns.set('value', orig + 1);
-    next();
-  });
+      ns.set('value', orig + 1);
+      next();
+    });
 
-  app.get('/THUNDAR', function (req, res) {
-    t.equal(ns.get('value'), 2, "value was incremented");
-    res.send({status : 'ok'});
-    res.end();
-  });
+    app.get('/THUNDAR', function (req, res) {
+      t.equal(ns.get('value'), 2, "value was incremented");
+      res.send({status : 'ok'});
+      res.end();
+    });
 
-  var server = http.createServer(app).listen(8080, function () {
-    request('http://localhost:8080/THUNDAR', {json : true}, function (error, res, body) {
-      t.notOk(error, "no error found");
-      t.equal(res.statusCode, 200, "got OK response");
-      t.deepEqual(body, {status : 'ok'}, "body was as expected");
-      server.close();
+    var server = http.createServer(app).listen(8080, function () {
+      request('http://localhost:8080/THUNDAR',
+              {json : true},
+              function (error, res, body) {
+        t.notOk(error, "no error found");
+        t.equal(res.statusCode, 200, "got OK response");
+        t.deepEqual(body, {status : 'ok'}, "body was as expected");
+        server.close();
+      });
     });
   });
 });
