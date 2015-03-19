@@ -28,7 +28,7 @@ var cls = require('continuation-local-storage');
 
 module.exports = function (req, res, next) {
   // pulling from the namespace, and set up per request
-  res.send({value : cls.getNameSpace('namespace').get('whatever')});
+  res.send({value : cls.getNamespace('namespace').get('whatever')});
 
   next();
 };
